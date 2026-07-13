@@ -1,0 +1,225 @@
+/* ===== CUSTOM FONT IMPORTS (Google Fonts) ===== */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Great+Vibes&family=Marcellus&family=Cormorant+SC:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+/* ===== TAILWIND THEME TOKENS ===== */
+@theme {
+  --color-maroon-deep: #6B0F1A;
+  --color-maroon-rich: #8B1E2B;
+  --color-gold: #C9A24B;
+  --color-gold-light: #E8D4A0;
+  --color-gold-foil: #D4AF37;
+  --color-ivory: #F7F0E3;
+  --color-cream-card: #FBF6EC;
+  --color-pearl: #FFFDF7;
+  --color-text-dark: #2A1210;
+  --color-shadow: #3D0A10;
+
+  --font-display: 'Cormorant Garamond', serif;
+  --font-script: 'Great Vibes', cursive;
+  --font-heading: 'Cinzel', serif;
+  --font-decorative: 'Cinzel Decorative', serif;
+  --font-body: 'Marcellus', serif;
+  --font-numeral: 'Cormorant SC', serif;
+}
+
+/* ===== BASE STYLES ===== */
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-maroon-deep);
+  color: var(--color-ivory);
+  width: 100%;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ===== Centering utility fix to override browser flex/margin-inline quirks ===== */
+.mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* ===== SCROLLBAR STYLING ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-shadow);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold-light);
+}
+
+/* ===== 9:16 PORTRAIT VIDEO FULLSCREEN FIT ON ALL DEVICES ===== */
+.video-portrait {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ===== UTILITY CLASSES ===== */
+.gold-text-gradient {
+  background: linear-gradient(135deg, var(--color-gold-foil), var(--color-gold-light), var(--color-gold), var(--color-gold-foil));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gold-border {
+  border: 1px solid var(--color-gold);
+  box-shadow: 0 0 8px rgba(201, 162, 75, 0.15), inset 0 0 8px rgba(201, 162, 75, 0.05);
+}
+
+.gold-rope-border {
+  border: 2px solid var(--color-gold);
+  box-shadow: 0 0 0 1px var(--color-maroon-deep), 0 0 0 3px var(--color-gold-foil), 0 0 12px rgba(201, 162, 75, 0.2);
+}
+
+.velvet-bg {
+  background: radial-gradient(ellipse at center, var(--color-maroon-rich) 0%, var(--color-maroon-deep) 60%, var(--color-shadow) 100%);
+}
+
+.velvet-texture {
+  position: relative;
+}
+
+.velvet-texture::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A24B' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== SECTION SPACING — tighter, optimized padding and spacing ===== */
+.section-padding {
+  padding: 2.5rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding: 3.5rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding: 4rem 3rem;
+  }
+}
+
+/* ===== GOLD GLOW PULSE ANIMATION ===== */
+@keyframes gold-pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(201, 162, 75, 0.3), 0 0 40px rgba(201, 162, 75, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(201, 162, 75, 0.5), 0 0 60px rgba(201, 162, 75, 0.2);
+  }
+}
+
+.gold-glow-pulse {
+  animation: gold-pulse 2s ease-in-out infinite;
+}
+
+/* ===== MANDALA ROTATION ===== */
+@keyframes slow-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.mandala-rotate {
+  animation: slow-rotate 60s linear infinite;
+}
+
+/* ===== SHIMMER EFFECT ===== */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.gold-shimmer {
+  background: linear-gradient(90deg, var(--color-gold) 0%, var(--color-gold-light) 25%, var(--color-gold-foil) 50%, var(--color-gold-light) 75%, var(--color-gold) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ===== GARLAND MARQUEE ===== */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.garland-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+/* ===== PROGRESS BAR ===== */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-gold-foil), var(--color-gold-light));
+  z-index: 9999;
+  transition: width 0.1s linear;
+}
+
+/* ===== CONFETTI / CELEBRATION ===== */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.confetti-piece {
+  position: fixed;
+  top: -10px;
+  z-index: 9998;
+  pointer-events: none;
+  animation: confetti-fall var(--fall-duration, 4s) linear forwards;
+  animation-delay: var(--fall-delay, 0s);
+}
+
+/* ===== SELECTION COLORS ===== */
+::selection {
+  background-color: var(--color-gold);
+  color: var(--color-maroon-deep);
+}
