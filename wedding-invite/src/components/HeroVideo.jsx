@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Volume2, VolumeX } from 'lucide-react';
 import { wedding } from '../data/weddingData';
 import Diya from '../assets/motifs/Diya';
 import Mandala from '../assets/motifs/Mandala';
@@ -18,25 +19,18 @@ const HeroVideo = ({ onStart }) => {
     setStarted(true);
     if (onStart) onStart();
 
-    // Play video
+    // Play video (muted to comply with mobile autoplay policies and allow simultaneous background audio)
     const video = videoRef.current;
     if (video) {
       video.currentTime = 0;
-      video.muted = false;
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(() => {
-          // Fallback: try muted if autoplay with sound fails
-          video.muted = true;
-          video.play().catch(() => {});
-        });
-      }
+      video.muted = true;
+      video.play().catch(() => {});
     }
 
     // Play background music
     const audio = audioRef.current;
     if (audio) {
-      audio.volume = 0.4;
+      audio.volume = 0.7;
       audio.currentTime = 0;
       audio.play().catch(() => {});
     }
@@ -56,7 +50,6 @@ const HeroVideo = ({ onStart }) => {
 
     const handleEnded = () => {
       setVideoFinished(true);
-      // Raise music volume since video audio is gone
       if (audioRef.current) {
         audioRef.current.volume = 0.7;
       }
@@ -76,7 +69,6 @@ const HeroVideo = ({ onStart }) => {
   const toggleMute = () => {
     const newMuted = !muted;
     setMuted(newMuted);
-    if (videoRef.current) videoRef.current.muted = newMuted;
     if (audioRef.current) audioRef.current.muted = newMuted;
   };
 
@@ -120,6 +112,7 @@ const HeroVideo = ({ onStart }) => {
           ref={videoRef}
           className="video-portrait"
           playsInline
+          muted
           preload="auto"
           poster="/invitation-poster.jpg"
         >
@@ -226,7 +219,7 @@ const HeroVideo = ({ onStart }) => {
               w-12 h-12 flex items-center justify-center
               bg-maroon-deep/80 backdrop-blur-sm
               border border-gold/30 rounded-full
-              text-gold text-base cursor-pointer
+              text-gold cursor-pointer
               hover:border-gold/60 transition-colors
               shadow-lg
             "
@@ -237,7 +230,22 @@ const HeroVideo = ({ onStart }) => {
             whileTap={{ scale: 0.9 }}
             aria-label={muted ? 'Unmute' : 'Mute'}
           >
-            {muted ? '🔇' : '🔊'}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={muted ? 'muted' : 'unmuted'}
+                initial={{ opacity: 0, rotate: -90, scale: 0.8 }}
+                animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
+                transition={{ duration: 0.2 }}
+                className="flex items-center justify-center"
+              >
+                {muted ? (
+                  <VolumeX className="w-5 h-5" />
+                ) : (
+                  <Volume2 className="w-5 h-5" />
+                )}
+              </motion.div>
+            </AnimatePresence>
           </motion.button>
         )}
       </AnimatePresence>
