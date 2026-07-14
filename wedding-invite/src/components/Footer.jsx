@@ -4,6 +4,7 @@ import { wedding } from '../data/weddingData';
 import Mandala from '../assets/motifs/Mandala';
 import GarlandBorder from '../assets/patterns/GarlandBorder';
 import OrnamentDivider from './shared/OrnamentDivider';
+import { InstagramOutlined } from '@ant-design/icons';
 
 const Footer = () => {
   return (
@@ -89,6 +90,9 @@ const Footer = () => {
         >
           © 2026 Wedding of {wedding.bride} & {wedding.groom}
         </motion.p>
+
+        <OrnamentDivider />
+
         <motion.p
           className="font-heading text-[9px] sm:text-[10px] text-gold/30 tracking-[0.1em] uppercase mt-8"
           initial={{ opacity: 0 }}
@@ -96,7 +100,7 @@ const Footer = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 1.3 }}
         >
-          Designed with ❤️ By <a href="https://www.instagram.com/abdullha_kalamban" target="_blank" rel="noopener noreferrer"> <span  className="gold-shimmer">AKS</span></a>
+          Designed with ❤️ By <a href="https://www.instagram.com/abdullha_kalamban" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1"> <span  className="gold-shimmer">AKS</span><InstagramOutlined style={{ fontSize: '16px' }} className="inline-block" /></a>
         </motion.p>
       </div>
 
