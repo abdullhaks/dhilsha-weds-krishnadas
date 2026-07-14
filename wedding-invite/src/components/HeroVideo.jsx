@@ -254,7 +254,7 @@ const HeroVideo = ({ onStart }) => {
       <AnimatePresence>
         {showScrollIndicator && (
           <motion.div
-            className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1"
+            className="absolute top-6 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
