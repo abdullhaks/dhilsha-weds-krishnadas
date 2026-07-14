@@ -6,7 +6,7 @@ import Diya from '../assets/motifs/Diya';
 import Mandala from '../assets/motifs/Mandala';
 import NamesReveal from './NamesReveal';
 
-const HeroVideo = ({ onStart }) => {
+const HeroVideo = ({ onStart, onFinish }) => {
   const videoRef = useRef(null);
   const audioRef = useRef(null);
   const [started, setStarted] = useState(false);
@@ -54,7 +54,10 @@ const HeroVideo = ({ onStart }) => {
         audioRef.current.volume = 0.7;
       }
       // Show scroll indicator after names animation
-      setTimeout(() => setShowScrollIndicator(true), 3500);
+      setTimeout(() => {
+        setShowScrollIndicator(true);
+        if (onFinish) onFinish();
+      }, 3500);
     };
 
     video.addEventListener('timeupdate', handleTimeUpdate);

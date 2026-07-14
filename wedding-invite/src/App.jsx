@@ -14,6 +14,9 @@ import CelebrationConfetti from './components/CelebrationConfetti';
 const App = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [celebrate, setCelebrate] = useState(false);
+  const [scrollLocked, setScrollLocked] = useState(true);
+
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +31,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen w-full flex flex-col items-center">
+    <div className={`relative w-full flex flex-col items-center ${scrollLocked ? 'h-[100dvh] overflow-hidden' : 'min-h-screen'}`}>
       {/* Celebration Popup */}
       <CelebrationConfetti trigger={celebrate} duration={6000} />
 
@@ -39,7 +42,7 @@ const App = () => {
       />
 
       {/* A. Hero Section */}
-      <HeroVideo onStart={() => setCelebrate(true)} />
+      <HeroVideo onStart={() => setCelebrate(true)} onFinish={() => setScrollLocked(false)} />
 
       {/* B. Save the Date */}
       <SaveTheDate />
